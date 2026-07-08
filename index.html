@@ -3,41 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
+<title>For Nat ❤️</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f8f7f4;display:flex;justify-content:center;align-items:center;height:100vh}
-.container{text-align:center}
-h2{color:#555;margin-bottom:20px}
-.envelope{position:relative;width:300px;height:200px;cursor:pointer}
-.base{width:300px;height:180px;background:#f4d6d6;border-radius:10px;position:absolute;bottom:0;box-shadow:0 10px 25px rgba(0,0,0,.15)}
-.flap{position:absolute;width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-top:100px solid #efc8c8;top:0;transform-origin:top;transition:.8s;z-index:5}
-.letter{position:absolute;width:260px;height:360px;background:#fff;left:20px;bottom:15px;border-radius:15px;padding:20px;overflow:auto;box-shadow:0 8px 20px rgba(0,0,0,.15);transform:translateY(120px);transition:1s}
-.open .flap{transform:rotateX(180deg)}
-.open .letter{transform:translateY(-170px)}
-h3{color:#ff7d9c;margin-bottom:15px}
-p{color:#555;line-height:1.8;text-align:left}
-.heart{font-size:40px;margin-top:15px;animation:beat 1s infinite}
-@keyframes beat{50%{transform:scale(1.2)}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Prompt',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#fffaf7,#ffeef3);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+.card{
+width:90%;
+max-width:500px;
+background:white;
+padding:35px;
+border-radius:25px;
+box-shadow:0 15px 40px rgba(0,0,0,.12);
+text-align:center;
+position:relative;
+z-index:2;
+}
+
+h1{
+color:#ff6f91;
+margin-bottom:20px;
+}
+
+#text{
+color:#555;
+line-height:1.9;
+font-size:18px;
+min-height:260px;
+white-space:pre-wrap;
+}
+
+button{
+margin-top:25px;
+padding:14px 35px;
+border:none;
+border-radius:40px;
+background:#ff8fab;
+color:white;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+background:#ff6f91;
+}
+
+#result{
+margin-top:20px;
+font-size:22px;
+color:#ff4f7d;
+font-weight:bold;
+}
+
+.heart{
+position:fixed;
+font-size:24px;
+animation:fall 5s linear forwards;
+pointer-events:none;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-100px);
+opacity:1;
+}
+100%{
+transform:translateY(110vh);
+opacity:0;
+}
+}
 </style>
 </head>
+
 <body>
-<div class="container">
-<h2>💌 กดที่ซองจดหมาย</h2>
-<div class="envelope" onclick="this.classList.toggle('open')">
-<div class="flap"></div>
-<div class="base"></div>
-<div class="letter">
-<h3>ถึงคุณณัฐพล ทรัพย์สมบูรณ์ 🤍</h3>
-<p>
-เค้าขอโทษที่ทำให้อ้วนรู้สึกงอมนะะ 🥺<br><br>
-เค้าไม่อยากให้อ้วนอยู่คนเดียวเลยจริงๆ เค้าไม่อยากปล่อยเด็กอ้วนน่ารักคนนี้ลงหรอกก 💗<br><br>
-เค้ารักเธอนะะ ถึงแม้เค้าจาทำเทองอม เทอให้อภัยเค้าได้ไหมคับบ 🥹🤍<br><br>
-นางสาวปัฐมาวดีคนนี้หวังว่าข้อความที่ส่งไปนี้จะทำให้คุณณัฐพลยิ้มได้นะะ 😊💕
-</p>
-<div class="heart">❤️</div>
+
+<div class="card">
+
+<h1>🤍 ถึงคุณณัฐพล ทรัพย์สมบูรณ์</h1>
+
+<div id="text"></div>
+
+<button onclick="forgive()">
+💖 ให้อภัยเค้านะ
+</button>
+
+<div id="result"></div>
+
 </div>
-</div>
-</div>
+
+<script>
+
+const message=`เค้าขอโทษที่ทำให้อ้วนรู้สึกงอมนะะ 🥺
+
+เค้าไม่อยากให้อ้วนอยู่คนเดียวเลยจริง ๆ
+
+เค้าไม่อยากปล่อยเด็กอ้วนน่ารักคนนี้ไปหรอกก 💗
+
+เค้ารักเธอนะ ถึงแม้เค้าจะทำให้เธองอม
+
+เธอให้อภัยเค้าได้ไหมคับบ ❤️
+
+จาก...
+นางสาวปัฐมาวดี 🤍`;
+
+let i=0;
+
+function typing(){
+if(i<message.length){
+document.getElementById("text").innerHTML+=message.charAt(i);
+i++;
+setTimeout(typing,40);
+}
+}
+
+typing();
+
+function forgive(){
+
+document.getElementById("result").innerHTML=
+"🥹💖 เย้! ขอบคุณที่ให้อภัยเค้านะ<br>เค้าสัญญาว่าจะดูแลอ้วนให้ดีกว่านี้ ❤️";
+
+for(let i=0;i<60;i++){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML=Math.random()>0.5?"💖":"❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+heart.style.animationDuration=(3+Math.random()*3)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
